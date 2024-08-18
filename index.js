@@ -5,34 +5,46 @@ const menu = {
     Desserts: ["Tiramisu", "Cheesecake"]
 };
 
+const prices = {
+    "Garlic Bread": 65.00,
+    "Bruschetta": 70.00,
+    "Margherita Pizza": 110.00,
+    "Spaghetti Carbonara": 120.00,
+    "Tiramisu": 90.00,
+    "Cheesecake": 75.00
+}
+
 // Function to display menu items by category
 function displayMenuItems(menu) {
     // Get the menu container element from the HTML
-
+    const menuContainer = document.getElementById('menu');
     // Loop through each category and its items in the menu object
+    
+    for (const category in menu) {
+        // Create category element
+        const categoryElement = document.createElement('h3');
+        categoryElement.textContent = category;
+        menuContainer.appendChild(categoryElement);
 
-        // Create an element to represent the category
+        // Create list element for items
+        const itemList = document.createElement('ul');
 
-        // Set the text content of the category element to the category name
+        menu[category].forEach(item => {
+            // create list item element
+            const listItem = document.createElement('li');
+            listItem.textContent = item;
 
-        // Append the category element to the menu container
+            // Add a click event listner to add item to "your order"
+            listItem.addEventListener('click', () => addToOrder(item));
+            itemList.appendChild(listItem);
+        });
 
-        // Create an element to represent a list of items
-
-        // Append a list of items element to the menu container
-
-        // Loop through the items in the category and create list items
-
-            // Create a list item element
-
-            // Set the text content of the list item element to the item name
-
-            // Attach a click event listener to the list item to add it to the order
-
-            // Append the list item to the list of items
-
-            
+        menuContainer.appendChild(itemList);
+    }       
 }
+
+// temporary function to check that everything is displayed correctly
+displayMenuItems(menu);
 
 // Callback function for adding an item to the order
 function addToOrder(itemName) {
